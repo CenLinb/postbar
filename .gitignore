@@ -1,0 +1,10 @@
+*.class
+/target/
+/target/*
+.classpath
+.settings*
+/.idea/*
+.project
+/.project
+/build/
+build/*
