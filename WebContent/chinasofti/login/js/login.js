@@ -32,11 +32,29 @@ function subLogin(){
     }
     
    
-	
+    $.ajax({
+    	type:"post",
+    	url:"/postbar/loginController/login",
+    	async:true,
+    	data:{
+    		userName:usrname,
+    		password:pwd
+    	},
+        dataType: "json",
+        success: function (json) {
+        	ajaxLoadEnd();
+        	if(json.message!=""){
+        		$("#tishi").html(json.message);
+        	}else{
+        		 window.location.replace("/postbar/index.html?menuUserName="+usrname.trim());        		
+        	}
+        }
+    })
 
-    window.location.replace("menu.html?menuUserName=sjm");
+
+    //window.location.replace("menu.html?menuUserName=sjm");
         		
-        		//alert(JSON.stringify(json));
+    //alert(JSON.stringify(json));
    
 
 }
@@ -90,9 +108,36 @@ function subReg(){
 		return;
 	}
 	
- 	
-      $.MsgBox.Alert("消息", "注册成功，请重新登录！");
-      gotoLogin();
+	ajaxLoading();
+	$.ajax({
+	    type: "POST",
+	    url: "/postbar/loginController/addRegister",
+	    async: true,
+	    data:{
+	    	userName:userName.trim(),
+	    	password:password.trim(),
+	    	regSex:regSex.trim(),
+	    	regAge:regAge.trim(),
+	    	regEmial:regEmial.trim()
+	   	 },
+	    dataType: "json",
+	    error: function (XMLHttpRequest, textStatus, errorThrown) {
+	    	$.MsgBox.Alert("消息","出错了，请于管理员联系");
+	    },
+	    success: function (json) {
+	    	ajaxLoadEnd();
+	    	if(json.message!=""){
+	    		$("#zucetishi").html(json.message);
+	    	}else{
+	    		$.MsgBox.Alert("消息", "注册成功，请重新登录！");
+	    		gotoLogin();
+	    	}
+	    }
+	});
+
+// 	
+//      $.MsgBox.Alert("消息", "注册成功，请重新登录！");
+//      gotoLogin();
        
 }
 

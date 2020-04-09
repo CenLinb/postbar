@@ -3,7 +3,7 @@
 <display-name>postbar</display-name>
   <welcome-file-list>
   	<!-- 设置缺省首页页面 -->
-    <welcome-file>/chinasofti/login/login.html</welcome-file>
+    <welcome-file>chinasofti/login/login.html</welcome-file>
   </welcome-file-list>
 
   
